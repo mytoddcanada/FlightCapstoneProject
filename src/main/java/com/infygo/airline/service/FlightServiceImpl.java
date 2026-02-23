@@ -9,8 +9,6 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
-import static java.util.Arrays.stream;
-
 @Service
 public class FlightServiceImpl implements FlightService {
 
@@ -31,12 +29,13 @@ public class FlightServiceImpl implements FlightService {
         List<Flight> modifiedFlights = flightRepository.findBySourceAndDestinationAndJourneyDate(source, destination, journeyDate);
         modifiedFlights.forEach(flight -> {
             Month month = flight.getJourneyDate().getMonth();
-            if(month == Month.DECEMBER || month == Month.JANUARY) {
-                flight.setFare(flight.getFare() * 1.20); // 10% discount for winter months
+            if (month == Month.DECEMBER || month == Month.JANUARY) {
+                // Apply 10% discount for winter months
+                flight.setFare(flight.getFare() * 1.20);
             }
         });
 
-        return flightRepository.findBySourceAndDestinationAndJourneyDate(source, destination, journeyDate);
+        return modifiedFlights;
     }
 
     @Override
