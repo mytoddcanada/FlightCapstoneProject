@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: airline
+  datasource:
+    url: jdbc:mysql://localhost:3306/practice?useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: admin
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8089
+  servlet:
+    context-path: /api
